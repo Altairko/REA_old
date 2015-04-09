@@ -1,6 +1,8 @@
 <?php
-
-$dbconnect = @mysql_connect ('localhost', 'user', 'passwd'); // host, user, passwd;
-
-
+ $db=@mysqli_connect("localhost", "root", "DnS357203", "rea");
+  //mysql_select_db ("rea",$db);
+if (!$db) { echo ("<center><div class='alert alert-danger'>
+        <strong>Соединение с базой данных не установлено. Обратитесь к вашему сис.админу.</strong>
+      </div></center>
+	"); }
 ?>
