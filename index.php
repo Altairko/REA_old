@@ -1,5 +1,12 @@
+<?
+include(config.php);
+if (!$dbconnect) { echo ("<center><div class='alert alert-danger'>
+        <strong>Соединение с базой данных не установлено. Обратитесь к вашему сис.админу.</strong>
+      </div></center>
+	"); }	
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,11 +36,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">REA</a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="#">Главная</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
@@ -44,8 +51,15 @@
     <div class="container">
 
       <div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+         <form class="form-signin" role="form">
+        <h3 class="form-signin-heading">Пожалуйста войдите!</h3>
+        <input type="email" class="form-control" placeholder="ID" required autofocus>
+        <input type="password" class="form-control" placeholder="Пароль" required>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Запомнить
+        </label>
+        <button class="btn btn-lg btn-success" type="submit">Войти</button>
+      </form>
       </div>
 
     </div><!-- /.container -->
