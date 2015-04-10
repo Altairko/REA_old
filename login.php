@@ -1,59 +1,58 @@
-<?
-// Страница авторизации
-include('config.php');//соединение с бд
+<?php
+	
+session_start();// вся процедура работает на сессиях. Именно в ней хранятся данные пользователя, пока он находится на сайте. Очень важно запустить их в самом начале странички!!!
 include('head.html');
+if (isset($_POST['login'])) { $login = $_POST['login']; if ($login == '') { unset($login);} } //заносим введенный пользователем логин в переменную $login, если он пустой, то уничтожаем переменную
+if (isset($_POST['password'])) { $password=$_POST['password']; if ($password =='') { unset($password);} }
+//заносим введенный пользователем пароль в переменную $password, если он пустой, то уничтожаем переменную
 
-# Функция для генерации случайной строки
-function generateCode($length=6) {
-    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
-    $code = "";
-    $clen = strlen($chars) - 1;
-    while (strlen($code) < $length) {
-            $code .= $chars[mt_rand(0,$clen)];
-    }
-    return $code;
-}
-
-
-
-if(isset($_POST['submit']))
+if (empty($login) or empty($password)) //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
 {
-    # Вытаскиваем из БД запись, у которой логин равняеться введенному
-    $query = mysqli_query($db,"SELECT user_id, user_password FROM users WHERE user_login='".mysqli_real_escape_string($db,$_POST['login'])."' LIMIT 1");
-    $data = mysqli_fetch_assoc($query);
+exit ("<center><div class='alert alert-danger'>
+        <strong>Вы ввели не всю информацию, венитесь назад и заполните все поля!</strong>
+      </div></center>");
+}
+//если логин и пароль введены,то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
+$login = stripslashes($login);
+$login = htmlspecialchars($login);
 
-    # Сравниваем пароли
-    if($data['user_password'] === md5(md5($_POST['password'])))
-    {
-        # Генерируем случайное число и шифруем его
-        $hash = md5(generateCode(10));
+$password = stripslashes($password);
+$password = htmlspecialchars($password);
 
-        if(!@$_POST['not_attach_ip'])
-        {
-            # Если пользователя выбрал привязку к IP
-            # Переводим IP в строку
-            $insip = ", user_ip=INET_ATON('".$_SERVER['REMOTE_ADDR']."')";
-        }
+//удаляем лишние пробелы
+$login = trim($login);
+$password = trim($password);
 
-        # Записываем в БД новый хеш авторизации и IP
-        mysqli_query($db, "UPDATE users SET user_hash='".$hash."' ".$insip." WHERE user_id='".$data['user_id']."'");
 
-        # Ставим куки
-        setcookie("id", $data['user_id'], time()+60*60*24*30);
-        setcookie("hash", $hash, time()+60*60*24*30);
+// подключаемся к базе
+include ("config.php");
 
-        # Переадресовываем браузер на страницу проверки нашего скрипта
-        header("Location: check.php"); exit();
-    }
-    else
-    {
-        echo "<div align='center' class='alert alert-danger'><strong>Вы ввели неправильный логин/пароль</strong></div>";
-    }
+
+$result = mysql_query("SELECT * FROM users WHERE user_login='$login'",$db); //извлекаем из базы все данные о пользователе с введенным логином
+$myrow = mysql_fetch_array($result);
+if (empty($myrow['user_password']))
+{
+//если пользователя с введенным логином не существует
+exit ("<center><div class='alert alert-danger'>
+        <strong>Извините, введённый вами логин или пароль неверный.</strong>
+      </div></center>");
+}
+else {
+//если существует, то сверяем пароли
+          if ($myrow['user_password']==$password) {
+          //если пароли совпадают, то запускаем пользователю сессию! Можете его поздравить, он вошел!
+          $_SESSION['login']=$myrow['user_login']; 
+          $_SESSION['id']=$myrow['user_id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
+          echo "<center><div class='alert alert-success'>
+        <strong>Вы успешно вошли на сайт! <a href='index.php'>Главная страница</a></strong>
+      </div></center>";
+          }
+
+       else {
+       //если пароли не сошлись
+       exit ("<center><div class='alert alert-danger'>
+        <strong>Извините, введённый вами логин или пароль неверный.</strong>
+      </div></center>");
+	   }
 }
 ?>
-<form method="POST">
-Логин <input name="login" type="text"><br>
-Пароль <input name="password" type="password"><br>
-Не прикреплять к IP(не безопасно) <input type="checkbox" name="not_attach_ip"><br>
-<input name="submit" type="submit" value="Войти">
-</form>

@@ -1,74 +1,73 @@
 <?
-// Страница регистрации нового пользователя
-include('config.php');
-include('head.html');
-//$db=mysqli_connect("localhost", "root", "DnS357203", "rea");
-if(isset($_POST['submit']))
-{
-    $err = array();
-
-    # проверям логин
-      if(!preg_match("/^[a-zA-Z0-9]+$/",$_POST['login']))
-    {
-        $err[] = "Логин может состоять только из букв английского алфавита и цифр";
-    }
-
-    if(strlen($_POST['login']) < 3 or strlen($_POST['login']) > 30)
-    {
-        $err[] = "Логин должен быть не меньше 3-х символов и не больше 30";
-    }
-
-    # проверяем, не сущестует ли пользователя с таким именем
-    $query = mysqli_query($db, "SELECT COUNT(user_id) FROM users WHERE user_login='" .$_POST['login']."'");
-       if(mysqli_num_rows($query) > 0)
-    {
-        $err[] = "Пользователь с таким логином уже существует в базе данных";
-    }
-
-    # Если нет ошибок, то добавляем в БД нового пользователя
-    if(count($err) == 0)
-    {
-
-        $login = $_POST['login'];
-
-        # Убераем лишние пробелы и делаем двойное шифрование
-        $password = md5(md5(trim($_POST['password'])));
-
-        mysqli_query($db,"INSERT INTO users SET user_login='".$login."', user_password='".$password."'");
-        echo("<div align='center' class='alert alert-success'>
-        <strong>Регистрация прошла успешно</strong>
-      </div>      
-        ");
-        header('Location: /',true, 307);
-         exit();
-    }
-    else
-    {        
-	    foreach($err AS $error)
-        {
-            echo "<div align='center' class='alert alert-danger'><strong>При регистрации произошли следующие ошибки:</strong>".$error."</div>";
-        }
-    }
-}
-?>
-
-<!DOCTYPE html>
-<html lang="ru">
-	<body>
-		   <div class="container">
-
-      <div class="starter-template">
-         <form class="form-signin" role="form" method="POST">
-        <h3 class="form-signin-heading">Зарегистрируйтесь</h3>
+include('head.html');	
+?>	
+    <div class="starter-template">
+         <form class="form-signin" role="form" action="test/save_user.php" method="POST">
+        <h3 class="form-signin-heading">Регистрация нового сотрудника</h3>
         <input name="login" type="text" class="form-control" placeholder="ID" required autofocus>
-        <input name="password" type="password" class="form-control" placeholder="Пароль" required>
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Запомнить
-        </label>
+        <input name="password" type="password" class="form-control" placeholder="Пароль" required>       
        <button name="submit" class="btn btn-lg btn-success" type="submit">Зарегистрироваться</button>
       </form>
       </div>
 
     </div><!-- /.container -->
-	</body>
+    
+  </body>
 </html>
+<!--
+<?php
+
+if (isset($_POST['login'])) { $login = $_POST['login']; if ($login == '') { unset($login);} } //заносим введенный пользователем логин в переменную $login, если он пустой, то уничтожаем переменную
+if (isset($_POST['password'])) { $password=$_POST['password']; if ($password =='') { unset($password);} }
+//заносим введенный пользователем пароль в переменную $password, если он пустой, то уничтожаем переменную
+
+if (empty($login) or empty($password)) //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
+{
+exit ("<center><div class='alert alert-danger'>
+        <strong>Вы ввели не всю информацию, венитесь назад и заполните все поля!</strong>
+      </div></center>");
+}
+//если логин и пароль введены,то обрабатываем их, чтобы теги и скрипты не работали, мало ли что люди могут ввести
+$login = stripslashes($login);
+$login = htmlspecialchars($login);
+
+$password = stripslashes($password);
+$password = htmlspecialchars($password);
+
+//удаляем лишние пробелы
+$login = trim($login);
+$password = trim($password);
+
+
+// подключаемся к базе
+include ("config.php");// файл bd.php должен быть в той же папке, что и все остальные, если это не так, то просто измените путь 
+
+// проверка на существование пользователя с таким же логином
+$result = mysql_query("SELECT user_id FROM users WHERE user_login='$login'",$db);
+$myrow = mysql_fetch_array($result);
+if (!empty($myrow['user_id'])) {
+exit ("<center><div class='alert alert-danger'>
+        <strong>Извините, введённый вами логин уже зарегистрирован. Введите другой логин.</strong>
+      </div></center>");
+}
+
+// если такого нет, то сохраняем данные
+$result2 = mysql_query ("INSERT INTO users (user_login,user_password) VALUES('$login','$password')");
+// Проверяем, есть ли ошибки
+if ($result2=='TRUE')
+{
+echo "<center><div class='alert alert-success'>
+        <strong>Вы успешно зарегистрированы! Теперь вы можете зайти на сайт. <a href='index.php'>Главная страница</a></strong>
+      </div></center>";
+}
+
+else {
+echo "<center><div class='alert alert-danger'>
+        <strong>Ошибка! Вы не зарегистрированы.</strong>
+      </div></center>";
+     }
+?>
+-->
+
+
+  
