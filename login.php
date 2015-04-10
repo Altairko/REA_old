@@ -55,4 +55,8 @@ else {
       </div></center>");
 	   }
 }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> origin/master
