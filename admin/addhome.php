@@ -1,30 +1,38 @@
 <?
+session_start();
 include('../theme/head.html');
+// Проверяем, пусты ли пересменные логина и id пользователя
+if (empty($_SESSION['login']) or empty($_SESSION['id']) or empty($_SESSION['usern']))
+{
+include('../theme/flogin.html');
+}
+else
+   {
 echo '
 <div class="alert alert-info">
-        <strong><center>Редактирование сведений о клиенте.</center></strong>
+        <strong><center>Добавление объекта продажи.</center></strong>
 </div>
   <form align="center" class="form-horizontal" name="add" method="post" enctype="multipart/form-data" action="add.php">
 <div class="form-group">
-    <label  class="col-sm-4 control-label">Наименование:</label>
+    <label  class="col-sm-4 control-label">Наименование <span class="glyphicon glyphicon-barcode"></span>:</label>
     <div class="col-sm-5">
       <input type="text" class="form-control" name="name" placeholder="Наименование" value="'.$item['name'].'">
     </div>
   </div>
   <div class="form-group">
-    <label  class="col-sm-4 control-label">Цена:</label>
+    <label  class="col-sm-4 control-label">Цена <span class="glyphicon glyphicon-ruble"></span>:</label>
     <div class="col-sm-5">
-      <input type="number" class="form-control" name="price" placeholder="руб.коп" value="'.$item['price'].'">
+   <input type="number" class="form-control" name="price" placeholder="руб.коп" value="'.$item['price'].'" >
     </div>
   </div>
   <div class="form-group">
-    <label  class="col-sm-4 control-label">Фото:</label>
+    <label  class="col-sm-4 control-label">Фото <span class="glyphicon glyphicon-camera"></span>:</label>
     <div class="col-sm-5">
-      <input type="file" class="form-control" name="photo" value="'.$item['photo'].'">
+      <input type="file" class="form-control" name="photo" >
     </div>
   </div>
   <div class="form-group">
-    <label  class="col-sm-4 control-label">Описание:</label>
+    <label  class="col-sm-4 control-label">Описание <span class="glyphicon glyphicon-comment"></span>:</label>
     <div class="col-sm-4">
       <textarea name="opis" class="form-control" rows="3" placeholder="Описание объекта">'.$item['opis'].'</textarea>
     </div>
@@ -39,4 +47,5 @@ echo '
   </form>
   </body>
 </html>';
+}
 ?>
