@@ -1,10 +1,12 @@
 <?php
+
 	include('../theme/head.html');
 if (isset($_POST['login'])) { $login = $_POST['login']; if ($login == '') { unset($login);} } //заносим введенный пользователем логин в переменную $login, если он пустой, то уничтожаем переменную
 if (isset($_POST['password'])) { $password=$_POST['password']; if ($password =='') { unset($password);} }
+if (isset($_POST['user_name'])) { $user_name=$_POST['user_name']; if ($user_name =='') { unset($user_name);} }
 //заносим введенный пользователем пароль в переменную $password, если он пустой, то уничтожаем переменную
 
-if (empty($login) or empty($password)) //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
+if (empty($login) or empty($password) or empty($user_name)) //если пользователь не ввел логин или пароль, то выдаем ошибку и останавливаем скрипт
 {
 exit ("<center><div class='alert alert-danger'>
         <strong>Вы ввели не всю информацию, венитесь назад и заполните все поля!</strong>
@@ -17,9 +19,13 @@ $login = htmlspecialchars($login);
 $password = stripslashes($password);
 $password = htmlspecialchars($password);
 
+$user_name = stripslashes($user_name);
+$user_name = htmlspecialchars($user_name);
+
 //удаляем лишние пробелы
 $login = trim($login);
 $password = trim($password);
+$user_name = trim($user_name);
 
 
 // подключаемся к базе
@@ -35,7 +41,7 @@ exit ("<center><div class='alert alert-danger'>
 }
 
 // если такого нет, то сохраняем данные
-$result2 = mysql_query ("INSERT INTO users (user_login,user_password) VALUES('$login','$password')");
+$result2 = mysql_query ("INSERT INTO users (user_login,user_password,user_name) VALUES('$login','$password','$user_name')");
 // Проверяем, есть ли ошибки
 if ($result2=='TRUE')
 {

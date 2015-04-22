@@ -42,7 +42,8 @@ else {
           if ($myrow['user_password']==$password) {
           //если пароли совпадают, то запускаем пользователю сессию! Можете его поздравить, он вошел!
           $_SESSION['login']=$myrow['user_login']; 
-          $_SESSION['id']=$myrow['user_id'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
+          $_SESSION['id']=$myrow['user_id'];
+          $_SESSION['usern']=$myrow['user_name'];//эти данные очень часто используются, вот их и будет "носить с собой" вошедший пользователь
           echo "<center><div class='alert alert-success'>
         <strong>Вы успешно вошли на сайт! <a href='index.php'>Главная страница</a></strong>
       </div></center>";

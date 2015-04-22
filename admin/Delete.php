@@ -1,6 +1,6 @@
 <?php
-	include('../theme/head.html');
-	session_start();
+session_start();
+	include('../theme/head.html');	
 	// Проверяем, пусты ли пересменные логина и id пользователя
 if (empty($_SESSION['login']) or empty($_SESSION['id']))
 {
@@ -10,10 +10,7 @@ include('../theme/flogin.html');
 
 }
 else{
-$db_host = 'localhost';
-$db_name = 'rea';
-$db_username = 'root';
-$db_password = 'DnS357203';
+include('config.php');
 $connect_to_db = mysql_connect($db_host, $db_username, $db_password);
 mysql_select_db($db_name, $connect_to_db);
 mysql_query('SET NAMES UTF8');

@@ -1,24 +1,20 @@
-﻿<?php
+<?php
 	session_start();
 	include('../theme/head.html');
 	if (empty($_SESSION['login']) or empty($_SESSION['id']))
 {
 	include('../theme/flogin.html');
 }
-else{	
+else{
 	//Функция обновляет запись в таблице БД
 if(($_POST['Fam']=='') or ($_POST['Name']=='') or ($_POST['FName']=='')
 or ($_POST['date']=='') or ($_POST['email']=='') or ($_POST['phone']=='') or ($_POST['price']=='') or ($_POST['naimen']==''))
 die('<center><div class="alert alert-danger"><strong>Все поля должны быть заполнены...</strong></div></center>') ;
-$db_host = 'localhost';
-$db_name = 'rea';
-$db_username = 'root';
-$db_password = 'DnS357203';
+include('config.php');
 $connect_to_db =
 	mysql_connect($db_host,$db_username,$db_password);
 	mysql_select_db($db_name, $connect_to_db);
 	mysql_query('SET NAMES UTF8');
-	
 $fam = mysql_real_escape_string( $_POST['Fam'] );
 $name = mysql_real_escape_string( $_POST['Name'] );
 $fname = mysql_real_escape_string( $_POST['FName'] );
@@ -38,9 +34,7 @@ $query = "UPDATE bay_user SET Fam='".$fam."',".
 mysql_query ($query)
 	or die("<center><div class='alert alert-danger'><strong>Ошибка запроса (Edit): ".mysql_error()."</strong></div></center>");
 echo '<script type="text/javascript">
-	
 		window.location.href="index.php?page=1";
-	
 	</script>';
 die();
 }

@@ -1,4 +1,5 @@
 <?php
+session_start();
 	include('../theme/head.html');
 	if (empty($_SESSION['login']) or empty($_SESSION['id']))
 {
@@ -12,10 +13,7 @@ error_reporting(0);
 $kolv_zap=1;
 $page=$_GET['page'];
 $n1=($page-1)*$kolv_zap;
-$db_host='localhost';
-$db_name='rea';
-$db_username='root';
-$db_password='DnS357203';
+include('config.php');
 $db_table_to_show='bay_user';
 $connect_to_db=mysql_connect($db_host, $db_username, $db_password) or die("Ошибка соединения: ".mysql_error());
 mysql_select_db($db_name, $connect_to_db) or die("Ошибка открытия БД: ".mysql_error());
