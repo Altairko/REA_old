@@ -11,7 +11,7 @@ else{
 	include('../theme/userlogin.php');
 ini_set('display_errors',0);
 error_reporting(0);
-$kolv_zap=10;
+$kolv_zap=1;
 $page=$_GET['page'];
 $n1=($page-1)*$kolv_zap;
 include('config.php');
@@ -26,7 +26,7 @@ $item=mysql_fetch_array($res);
 $res = mysql_query("SELECT COUNT(*) FROM sale");
 $row = mysql_fetch_row($res);
 $total = $row[0]; // всего записей
-$maxpage=$total/$kolv_zap;
+$maxpage=ceil($total/$kolv_zap);
 $res=mysql_query($query);
 $item=mysql_fetch_array($res);
 
@@ -56,7 +56,7 @@ if (!isset($_GET["action"])) $_GET["action"] = "showlist";
 // вывод всех записей из таблицы БД:
 
 $query=
-'SELECT id, name, price, photo, opis FROM sale LIMIT '.$n1.' , '.$kolv_zap*$page.'';
+'SELECT id, name, price, photo, opis FROM sale LIMIT '.$n1.' , '.$kolv_zap.'';
 $res=mysql_query($query);
 echo 
 '<table class="table table-striped">
@@ -129,7 +129,7 @@ echo'
   	echo'<span aria-hidden="true">&laquo;</span>';	
   	}
     echo'</li>';
-    for ($i=1;$i<=$total;$i++){
+    for ($i=1;$i<=$maxpage;$i++){
     echo'<li><a href="homeview.php?page='.($i).'">'.$i.'</a></li>';
    	}
    echo'<li>';
@@ -146,7 +146,7 @@ echo'
 
 		
 	echo '<div class="alert alert-info">';	
-	echo 'Всего страниц:'.$total;
+	echo 'Всего страниц:'.$maxpage;
 	echo '<br>Сейчас вы на странице:'.$page;
 	echo '</div>';
 echo'</center></body>';

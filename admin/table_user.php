@@ -10,7 +10,7 @@ include('../theme/flogin.html');
 else{
 ini_set('display_errors',0);
 error_reporting(0);
-$kolv_zap=10;
+$kolv_zap=2;
 $page=$_GET['page'];
 $n1=($page-1)*$kolv_zap;
 include('config.php');
@@ -25,7 +25,7 @@ $item=mysql_fetch_array($res);
 $res = mysql_query("SELECT COUNT(*) FROM bay_user");
 $row = mysql_fetch_row($res);
 $total = $row[0]; // всего записей
-$maxpage=$total/$kolv_zap;
+$maxpage=ceil($total/$kolv_zap);
 $res=mysql_query($query);
 $item=mysql_fetch_array($res);
 
@@ -56,7 +56,7 @@ if (!isset($_GET["action"])) $_GET["action"] = "showlist";
 
 $query=
 'SELECT id, Fam, Name, FName, date, email, phone,price,naimen
-		FROM bay_user LIMIT '.$n1.' , '.$kolv_zap*$page.'';
+		FROM bay_user LIMIT '.$n1.' , '.$kolv_zap.'';
 $res=mysql_query($query);
 echo 
 '<table class="table table-striped">
@@ -141,7 +141,7 @@ echo'
   	echo'<span aria-hidden="true">&laquo;</span>';	
   	}
     echo'</li>';
-    for ($i=1;$i<=$total;$i++){
+    for ($i=1;$i<=$maxpage;$i++){
     echo'<li><a href="index.php?page='.($i).'">'.$i.'</a></li>';
    	}
    echo'<li>';
@@ -156,7 +156,7 @@ echo'
    echo' </li>
   </ul>';
 	echo '<div class="alert alert-info">';	
-	echo 'Всего страниц:'.$total;
+	echo 'Всего страниц:'.$maxpage;
 	echo '<br>Сейчас вы на странице:'.$page;
 	echo '</div>';
 echo'</center></body>';
