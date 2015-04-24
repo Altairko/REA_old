@@ -46,7 +46,7 @@ $query="insert into sale
 $res= mysql_query($query) or die("Ошибка добавления записи в таблицу...".mysql_error());
 echo '<script type="text/javascript">
 	<!--
-		window.location.href="homeview.php";
+		window.location.href="homeview.php?page=1";
 	//->
 	</script>';
 }

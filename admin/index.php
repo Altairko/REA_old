@@ -12,10 +12,7 @@ include('../theme/flogin.html');
 else
    {
    // Если не пусты, то мы выводим ссылку
-    echo "<center><div class='alert alert-success'>
-        Вы вошли на сайт, как <strong>".$_SESSION['usern']."</strong><form action='logout.php' method='post'><button type='submit'   class='btn btn-xs btn-danger' name='submit' >Выход</button></form>	
-      </div></center>";
-
+include('../theme/userlogin.php');
 include('table_user.php');
 }
 

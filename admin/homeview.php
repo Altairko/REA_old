@@ -8,6 +8,7 @@ session_start();
 include('../theme/flogin.html');
 }
 else{
+	include('../theme/userlogin.php');
 ini_set('display_errors',0);
 error_reporting(0);
 $kolv_zap=10;
@@ -100,7 +101,7 @@ while ($item=mysql_fetch_array($res))
 	  echo '<td>'.$item['name'].'</td>';
 	  echo '<td>'.$item['price'].'</td>';
 	  echo '<style>#pic{width:240px; height:240px;}</style><td><img id="pic" class="img-thumbnail" src=../uploads/'.$item['photo'].' alt="Изображение объекта"></td>';
-	  echo '<td>'.$item['opis'].'</td>';	  
+	  echo '<td class="col-md-4">'.$item['opis'].'</td>';
 	  echo '<td> <a href=edit.php?id='.$item['id'].'><span class="glyphicon glyphicon-pencil"></span></a></td>';
 	  echo '<td><a href=delete.php?id='.$item['id'].'><span class="glyphicon glyphicon-remove"></span></a></td>';
       echo '</tr>';	 
@@ -116,31 +117,34 @@ echo'
 </tr>
 </head>
 </table>
-<center>';
-if ($page>=2){
-	echo '<a align="left" href="homeview.php?page='.($page-1).'">
-		<<
-		</a>';
-		}
-	else
-		{
-			echo '<<';
+<center>
+<ul class="pagination">
+    <li>';
+    if ($page>=2){
+      echo'<a href="homeview.php?page='.($page-1).'" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>';
+ 	 }
+ 	 else{
+  	echo'<span aria-hidden="true">&laquo;</span>';	
+  	}
+    echo'</li>';
+    for ($i=1;$i<=$total;$i++){
+    echo'<li><a href="homeview.php?page='.($i).'">'.$i.'</a></li>';
+   	}
+   echo'<li>';
+   if ($page<$maxpage) {
+     echo' <a href="homeview.php?page='.($page+1).'" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>';
+ 	}
+ 	else{
+  	echo'<span aria-hidden="true">&raquo;</span>';	
+  	}
+   echo' </li>
+  </ul>';
+
 		
-		}	
-	echo '	<div class="btn-group">';
-	for ($i=1;$i<=$total;$i++){
-			echo'<button class="btn"><a href="homeview.php?page='.($i).'">'.$i.'</a></button>';
-			}
-			echo'</div>';
-		if ($page<$maxpage) {
-		echo '<a align="left" href="homeview.php?page='.($page+1).'">
-		>>
-		</a>';
-		}
-	else
-	{
-		echo '>>';
-	}	
 	echo '<div class="alert alert-info">';	
 	echo 'Всего страниц:'.$total;
 	echo '<br>Сейчас вы на странице:'.$page;

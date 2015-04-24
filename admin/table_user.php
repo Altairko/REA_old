@@ -10,7 +10,7 @@ include('../theme/flogin.html');
 else{
 ini_set('display_errors',0);
 error_reporting(0);
-$kolv_zap=1;
+$kolv_zap=10;
 $page=$_GET['page'];
 $n1=($page-1)*$kolv_zap;
 include('config.php');
@@ -129,31 +129,32 @@ echo'
 </tr>
 </head>
 </table>
-<center>';
-if ($page>=2){
-	echo '<a align="left" href="index.php?page='.($page-1).'">
-		<<
-		</a>';
-		}
-	else
-		{
-			echo '<<';
-		
-		}	
-	echo '	<div class="btn-group">';
-	for ($i=1;$i<=$total;$i++){
-			echo'<button class="btn"><a href="index.php?page='.($i).'">'.$i.'</a></button>';
-			}
-			echo'</div>';
-		if ($page<$maxpage) {
-		echo '<a align="left" href="index.php?page='.($page+1).'">
-		>>
-		</a>';
-		}
-	else
-	{
-		echo '>>';
-	}	
+<center>
+<ul class="pagination">
+    <li>';
+    if ($page>=2){
+      echo'<a href="index.php?page='.($page-1).'" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>';
+  	}
+  	else{
+  	echo'<span aria-hidden="true">&laquo;</span>';	
+  	}
+    echo'</li>';
+    for ($i=1;$i<=$total;$i++){
+    echo'<li><a href="index.php?page='.($i).'">'.$i.'</a></li>';
+   	}
+   echo'<li>';
+   if ($page<$maxpage) {
+     echo' <a href="index.php?page='.($page+1).'" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>';
+  	}
+  	else{
+  	echo'<span aria-hidden="true">&raquo;</span>';	
+  	}
+   echo' </li>
+  </ul>';
 	echo '<div class="alert alert-info">';	
 	echo 'Всего страниц:'.$total;
 	echo '<br>Сейчас вы на странице:'.$page;
