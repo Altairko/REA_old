@@ -10,6 +10,7 @@ include('../theme/flogin.html');
 
 }
 else{
+include('../theme/userlogin.php');
 include('config.php');
 $connect_to_db = mysql_connect($db_host, $db_username, $db_password);
 mysql_select_db($db_name, $connect_to_db);

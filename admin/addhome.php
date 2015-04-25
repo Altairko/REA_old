@@ -8,6 +8,7 @@ include('../theme/flogin.html');
 }
 else
    {
+    include('../theme/userlogin.php');
 echo '
 <div class="alert alert-info">
         <strong><center>Добавление объекта продажи.</center></strong>

@@ -10,7 +10,7 @@ include('../theme/flogin.html');
 else{
 ini_set('display_errors',0);
 error_reporting(0);
-$kolv_zap=2;
+$kolv_zap=10;
 $page=$_GET['page'];
 $n1=($page-1)*$kolv_zap;
 include('config.php');
@@ -54,9 +54,8 @@ $qr_result = mysql_query("select * from ".$db_table_to_show);
 if (!isset($_GET["action"])) $_GET["action"] = "showlist";
 // вывод всех записей из таблицы БД:
 
-$query=
-'SELECT id, Fam, Name, FName, date, email, phone,price,naimen
-		FROM bay_user LIMIT '.$n1.' , '.$kolv_zap.'';
+$query='SELECT `id`, `Fam`, `Name`,`FName`, `date`, `email`, `phone`,`price`,`naimen`
+		FROM `bay_user` LIMIT '.$n1.' , '.$kolv_zap.'';
 $res=mysql_query($query);
 echo 
 '<table class="table table-striped">
@@ -76,7 +75,7 @@ echo
 <th>Фамилия</th>
 <th>Имя</th>
 <th>Отчество</th>
-<th>Дата</th>
+<th>Дата под.заявки</th>
 <th>Email <span class="glyphicon glyphicon-envelope"></span></th></th>
 <th>Телефон <span class="glyphicon glyphicon-phone"></span></th>
 <th>Цена <span class="glyphicon glyphicon-ruble"></span></th>
@@ -92,7 +91,7 @@ echo
 <th>Фамилия</th>
 <th>Имя</th>
 <th>Отчество</th>
-<th>Дата</th>
+<th>Дата под.заявки</th>
 <th>Email <span class="glyphicon glyphicon-envelope"></span></th></th>
 <th>Телефон <span class="glyphicon glyphicon-phone"></span></th>
 <th>Цена <span class="glyphicon glyphicon-ruble"></span></th>

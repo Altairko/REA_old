@@ -1,7 +1,11 @@
 <?
 include('../theme/head.html');	
-?>	
-    <div class="starter-template">
+if (empty($_SESSION['login']) or empty($_SESSION['id']) or empty($_SESSION['usern']))
+{
+include('../theme/flogin.html');
+}
+else{
+   echo' <div class="starter-template">
          <form class="form-signin" role="form" action="save_user.php" method="POST">
         <h3 class="form-signin-heading">Регистрация нового сотрудника</h3>
         <input name="user_name" type="text" class="form-control" placeholder="Ф.И.О." required autofocus>
@@ -14,7 +18,7 @@ include('../theme/head.html');
     </div><!-- /.container -->
     
   </body>
-</html>
-
+</html>';
+}?>
 
   

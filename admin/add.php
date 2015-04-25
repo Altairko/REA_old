@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('../theme/head.html');
-
+include('../theme/userlogin.php');
 //var_dump(($_POST['name']=='')or($_POST['price']=='') or ($_FILES['photo']['name'])or($_POST['opis']==''));
 if (($_POST['name']=='')or($_POST['price']=='') or ($_FILES['photo']['name']=='')or($_POST['opis']==''))
 {

@@ -21,6 +21,7 @@ include('../theme/flogin.html');
 }
 else
    {
+   	include('../theme/userlogin.php');
 include_once('../theme/edit.php');
 }
 ?>

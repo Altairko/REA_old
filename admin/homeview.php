@@ -8,10 +8,10 @@ session_start();
 include('../theme/flogin.html');
 }
 else{
-	include('../theme/userlogin.php');
+include('../theme/userlogin.php');
 ini_set('display_errors',0);
 error_reporting(0);
-$kolv_zap=1;
+$kolv_zap=10;
 $page=$_GET['page'];
 $n1=($page-1)*$kolv_zap;
 include('config.php');
@@ -55,8 +55,7 @@ $qr_result = mysql_query("select * from ".$db_table_to_show);
 if (!isset($_GET["action"])) $_GET["action"] = "showlist";
 // вывод всех записей из таблицы БД:
 
-$query=
-'SELECT id, name, price, photo, opis FROM sale LIMIT '.$n1.' , '.$kolv_zap.'';
+$query='SELECT `id`, `obj_name`, `price`, `photo`, `opis` FROM `sale` LIMIT '.$n1.' , '.$kolv_zap.'';
 $res=mysql_query($query);
 echo 
 '<table class="table table-striped">
@@ -98,7 +97,7 @@ while ($item=mysql_fetch_array($res))
 	{
 	  echo '<tr>';
 	  echo '<td>'.$item['id'].'</td>';
-	  echo '<td>'.$item['name'].'</td>';
+	  echo '<td>'.$item['obj_name'].'</td>';
 	  echo '<td>'.$item['price'].'</td>';
 	  echo '<style>#pic{width:240px; height:240px;}</style><td><img id="pic" class="img-thumbnail" src=../uploads/'.$item['photo'].' alt="Изображение объекта"></td>';
 	  echo '<td class="col-md-4">'.$item['opis'].'</td>';
@@ -144,7 +143,6 @@ echo'
    echo' </li>
   </ul>';
 
-		
 	echo '<div class="alert alert-info">';	
 	echo 'Всего страниц:'.$maxpage;
 	echo '<br>Сейчас вы на странице:'.$page;
