@@ -17,13 +17,13 @@ echo '
 <div class="form-group">
     <label  class="col-sm-4 control-label">Наименование <span class="glyphicon glyphicon-barcode"></span>:</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" name="name" placeholder="Наименование" value="'.$item['name'].'">
+      <input type="text" class="form-control" name="obj_name" placeholder="Наименование" value="'.$item['obj_name'].'">
     </div>
   </div>
   <div class="form-group">
     <label  class="col-sm-4 control-label">Цена <span class="glyphicon glyphicon-ruble"></span>:</label>
     <div class="col-sm-5">
-   <input type="number" class="form-control" name="price" placeholder="руб.коп" value="'.$item['price'].'" >
+   <input type="number" class="form-control" name="price" placeholder="руб." value="'.$item['price'].'" >
     </div>
   </div>
   <div class="form-group">

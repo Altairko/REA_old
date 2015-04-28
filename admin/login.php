@@ -27,7 +27,7 @@ $password = trim($password);
 // подключаемся к базе
 include ("config.php");
 
-
+mysql_query('SET NAMES UTF8');
 $result = mysql_query("SELECT * FROM users WHERE user_login='$login'",$db); //извлекаем из базы все данные о пользователе с введенным логином
 $myrow = mysql_fetch_array($result);
 if (empty($myrow['user_password']))

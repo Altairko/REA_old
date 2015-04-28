@@ -1,11 +1,11 @@
 <?
 include('/theme/head.html');
+include('/admin/config.php');
 ini_set('display_errors',0);
 error_reporting(0);
 $kolv_zap=10;
 $page=$_GET['page'];
 $n1=($page-1)*$kolv_zap;
-include('/admin/config.php');
 $db_table_to_show='sale';
 $connect_to_db=mysql_connect($db_host, $db_username, $db_password) or die("Ошибка соединения: ".mysql_error());
 mysql_select_db($db_name, $connect_to_db) or die("Ошибка открытия БД: ".mysql_error());

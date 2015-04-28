@@ -89,7 +89,6 @@ echo
 <th>Фото</th>
 <th>Описание</th>
 <th></th>
-<th></th>
 </tr>
 </tfoot>';
 
@@ -101,8 +100,7 @@ while ($item=mysql_fetch_array($res))
 	  echo '<td>'.$item['price'].'</td>';
 	  echo '<style>#pic{width:240px; height:240px;}</style><td><img id="pic" class="img-thumbnail" src=../uploads/'.$item['photo'].' alt="Изображение объекта"></td>';
 	  echo '<td class="col-md-4">'.$item['opis'].'</td>';
-	  echo '<td> <a href=edit.php?id='.$item['id'].'><span class="glyphicon glyphicon-pencil"></span></a></td>';
-	  echo '<td><a href=delete.php?id='.$item['id'].'><span class="glyphicon glyphicon-remove"></span></a></td>';
+	  echo '<td> <a href=edithome.php?id='.$item['id'].'><span class="glyphicon glyphicon-pencil"></span></a></td>';	  
       echo '</tr>';	 
     }
 echo'    

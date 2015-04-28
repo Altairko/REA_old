@@ -57,7 +57,7 @@ if (!isset($_GET["action"])) $_GET["action"] = "showlist";
 $query='SELECT `id`, `Fam`, `Name`,`FName`, `date`, `email`, `phone`,`price`,`naimen`
 		FROM `bay_user` LIMIT '.$n1.' , '.$kolv_zap.'';
 $res=mysql_query($query);
-echo 
+echo
 '<table class="table table-striped">
 <thead>
 <tr>
