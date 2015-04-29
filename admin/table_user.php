@@ -60,7 +60,7 @@ $qr_result = mysql_query("select * from ".$db_table_to_show);
 if (!isset($_GET["action"])) $_GET["action"] = "showlist";
 // вывод всех записей из таблицы БД:
 
-$query='SELECT `id`, `Fam`, `Name`,`FName`, `date`, `email`, `phone`,`price`,`naimen`
+$query='SELECT `id`, `Fam`, `Name`,`FName`, `date`, `email`, `phone`,`price`,`naimen`, `bay`
 		FROM `bay_user` LIMIT '.$n1.' , '.$kolv_zap.'';
 $res=mysql_query($query);
 echo
@@ -129,7 +129,7 @@ while ($item=mysql_fetch_array($res))
 	  echo '<td><a href=delete.php?id='.$item['id'].'><span class="glyphicon glyphicon-remove"></span></a></td>';
     if ($item['bay']==1)
       {
-         echo '<td> <a href=edit.php?id='.$item['id'].'><span class="glyphicon glyphicon-pencil"></span></a></td>';
+         echo '<td> <a href=export.php?id='.$item['id'].'><span class="glyphicon glyphicon-print"></span></a></td>';
       }
       echo '</tr>';
     }
