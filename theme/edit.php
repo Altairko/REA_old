@@ -1,4 +1,5 @@
 <?
+
 echo '
 <div class="alert alert-info">
         <strong><center>Редактирование сведений о клиенте.</center></strong>
@@ -53,6 +54,21 @@ echo '
     <div class="col-sm-4">
       <textarea name="naimen" class="form-control" rows="3" placeholder="Описание объекта">'.$item['naimen'].'</textarea>
     </div>
+  </div>
+  <div class="form-group">
+    <label  class="col-sm-4 control-label">Куплено:</label>
+    <div class="col-sm-5">';
+      if ($item['bay']=='0'){
+        echo '<input type="checkbox" name="bay[]" id="blankCheckbox" value="0">
+          <div class="alert alert-danger" role="alert">
+          <center>Внимание, это пункт удалит текущую запись из списка на продажу.</center>
+          </div>
+        ';
+     }
+      else{echo '<input type="checkbox" name="bay[]" id="blankCheckbox" value="1" checked >';
+      $id_sale=$item['id'];
+      }
+   echo' </div>
   </div>
     <div class="form-group">
     <div class="col-sm-offset-5 col-sm-2">

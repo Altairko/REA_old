@@ -4,7 +4,7 @@ session_start();
 include('config.php');
 include('../theme/head.html');
 // Проверяем, пусты ли пересменные логина и id пользователя
-if (empty($_SESSION['login']) or empty($_SESSION['id']))
+if (empty($_SESSION['login']) or empty($_SESSION['id']) or empty($_SESSION['usern']))
 {	
 // Если пусты, то мы не выводим форму входа
 include('../theme/flogin.html');

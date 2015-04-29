@@ -25,11 +25,11 @@ echo '
    <div class="form-group">
     <label  class="col-sm-4 control-label">Забронировано:</label>
     <div class="col-sm-5">';
-      //if ($item['reserv']=='0'){
-        /*echo '<input type="checkbox" name="reserv" id="blankCheckbox" value="0">';*/
-     // }
-      /*else{*/echo '<input type="checkbox" name="reserv[]" id="blankCheckbox" value="1" checked>';
-     //  }
+      if ($item['reserv']=='0'){
+        echo '<input type="checkbox" name="reserv[]" id="blankCheckbox" value="0">';
+     }
+      else{echo '<input type="checkbox" name="reserv[]" id="blankCheckbox" value="1" checked>';
+      }
    echo' </div>
   </div>
     <div class="form-group">

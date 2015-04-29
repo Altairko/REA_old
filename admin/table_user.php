@@ -8,10 +8,16 @@ session_start();
 include('../theme/flogin.html');
 }
 else{
+  if (empty($_GET['page'])){
+  $page=1;
+}
+else{
+  $page=$_GET['page'];
+}
 ini_set('display_errors',0);
 error_reporting(0);
 $kolv_zap=10;
-$page=$_GET['page'];
+
 $n1=($page-1)*$kolv_zap;
 include('config.php');
 $db_table_to_show='bay_user';
@@ -80,8 +86,11 @@ echo
 <th>Телефон <span class="glyphicon glyphicon-phone"></span></th>
 <th>Цена <span class="glyphicon glyphicon-ruble"></span></th>
 <th>Наименование</th>
-<th></th>
-<th></th>
+<th></th>';
+if ($item['bay']==1){
+  echo '<th></th>';
+}
+echo'<th></th>
 </tr>
 </thead>
 
@@ -97,8 +106,11 @@ echo
 <th>Цена <span class="glyphicon glyphicon-ruble"></span></th>
 <th>Наименование</th>
 <th></th>
-<th></th>
-</tr>
+<th></th>';
+if ($item['bay']==1){
+  echo '<th></th>';
+}
+echo' </tr>
 </tfoot>';
 
 while ($item=mysql_fetch_array($res))
@@ -115,12 +127,16 @@ while ($item=mysql_fetch_array($res))
 	  echo '<td>'.$item['naimen'].'</td>';
 	  echo '<td> <a href=edit.php?id='.$item['id'].'><span class="glyphicon glyphicon-pencil"></span></a></td>';
 	  echo '<td><a href=delete.php?id='.$item['id'].'><span class="glyphicon glyphicon-remove"></span></a></td>';
-      echo '</tr>';	 
+    if ($item['bay']==1)
+      {
+         echo '<td> <a href=edit.php?id='.$item['id'].'><span class="glyphicon glyphicon-pencil"></span></a></td>';
+      }
+      echo '</tr>';
     }
-echo'    
+echo'
 </table>
 
-<table>	
+<table>
 <thead>
 <tr>
 <th>

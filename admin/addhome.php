@@ -17,13 +17,13 @@ echo '
 <div class="form-group">
     <label  class="col-sm-4 control-label">Наименование <span class="glyphicon glyphicon-barcode"></span>:</label>
     <div class="col-sm-5">
-      <input type="text" class="form-control" name="obj_name" placeholder="Наименование" value="'.$item['obj_name'].'">
+      <input type="text" class="form-control" name="obj_name" placeholder="Наименование" >
     </div>
   </div>
   <div class="form-group">
     <label  class="col-sm-4 control-label">Цена <span class="glyphicon glyphicon-ruble"></span>:</label>
     <div class="col-sm-5">
-   <input type="number" class="form-control" name="price" placeholder="руб." value="'.$item['price'].'" >
+   <input type="number" class="form-control" name="price" placeholder="руб."  >
     </div>
   </div>
   <div class="form-group">
@@ -35,7 +35,7 @@ echo '
   <div class="form-group">
     <label  class="col-sm-4 control-label">Описание <span class="glyphicon glyphicon-comment"></span>:</label>
     <div class="col-sm-4">
-      <textarea name="opis" class="form-control" rows="3" placeholder="Описание объекта">'.$item['opis'].'</textarea>
+      <textarea name="opis" class="form-control" rows="3" placeholder="Описание объекта"></textarea>
     </div>
   </div>
   <div class="form-group">
