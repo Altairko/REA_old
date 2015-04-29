@@ -81,16 +81,18 @@ class PHPWord_Template {
      * @param mixed $replace
      */
     public function setValue($search, $replace) {
-        if(substr($search, 0, 2) !== '${' && substr($search, -1) !== '}') {
-            $search = '${'.$search.'}';
-        }
-        
-        if(!is_array($replace)) {
-            $replace = utf8_encode($replace);
-        }
-        
-        $this->_documentXML = str_replace($search, $replace, $this->_documentXML);
+    if(substr($search, 0, 2) !== '${' && substr($search, -1) !== '}') {
+        //было - $search = '${'.$search.'}';
+        $search = '/\$\{.*?'.$search.'.*?\}/is';
     }
+
+    if(!is_array($replace)) {
+        //$replace = utf8_encode($replace);
+    }
+
+    //было - $this->_documentXML = str_replace($search, $replace, $this->_documentXML);
+    $this->_documentXML = preg_replace($search, $replace, $this->_documentXML);
+}
     
     /**
      * Save Template
