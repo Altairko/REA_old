@@ -66,7 +66,7 @@ echo '
         ';
      }
       else{echo '<input type="checkbox" name="bay[]" id="blankCheckbox" value="1" checked >';
-      $id_sale=$item['id'];
+      $id_sale=$item['id_sale'];
       }
    echo' </div>
   </div>

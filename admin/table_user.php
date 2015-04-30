@@ -3,7 +3,7 @@ session_start();
 	include('../theme/head.html');
 	if (empty($_SESSION['login']) or empty($_SESSION['id']))
 {
-	
+
 // Если пусты, то мы не выводим форму входа
 include('../theme/flogin.html');
 }
@@ -132,7 +132,7 @@ while ($item=mysql_fetch_array($res))
     if ($item['bay']==1)
       {
          echo '<td> <a href=export.php?id='.$item['id'].'><span class="glyphicon glyphicon-print"></span></a></td>';
-         echo '<td> <a href=download.php?id='.$item['id'].'><span class="glyphicon glyphicon-download"></span></a></td>';
+         echo '<td> <a href=download.php?id='.$item['id'].'><span class="glyphicon glyphicon-download"></span></a></td>'; 
       }
       echo '</tr>';
     }
@@ -156,7 +156,7 @@ echo'
       </a>';
   	}
   	else{
-  	echo'<span aria-hidden="true">&laquo;</span>';	
+  	echo'<span aria-hidden="true">&laquo;</span>';
   	}
     echo'</li>';
     for ($i=1;$i<=$maxpage;$i++){
@@ -169,11 +169,11 @@ echo'
       </a>';
   	}
   	else{
-  	echo'<span aria-hidden="true">&raquo;</span>';	
+  	echo'<span aria-hidden="true">&raquo;</span>';
   	}
    echo' </li>
   </ul>';
-	echo '<div class="alert alert-info">';	
+	echo '<div class="alert alert-info">';
 	echo 'Всего страниц:'.$maxpage;
 	echo '<br>Сейчас вы на странице:'.$page;
 	echo '</div>';
