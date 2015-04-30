@@ -30,20 +30,9 @@ $item=mysql_fetch_array($res);
 
 if (!isset($item['id']))
 {
-ECHO '<br><br><br><br><br><br><br><br><br><br>
-<table align="center">
-<tbody>
-<tr width="40%">
-<td align="center">Сообщение:</td>
-</tr>
-<tr>
-<td align="center">Таблица пуста!</td>
-</tr>
-</tbody>
-</tfoot>
-<td align="center"><button type="button" onClick="history.back();"> Закрыть</button></td>
-</tfoot>
-</table>';
+ECHO ' <div class="alert alert-danger" role="alert">
+          <center>Нет доступных объектов для продажи.</center>
+          </div>';
 die();
 }
 // используем кодировку utf8:

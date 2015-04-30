@@ -89,6 +89,7 @@ echo
 <th></th>';
 if ($item['bay']==1){
   echo '<th></th>';
+  echo '<th></th>';
 }
 echo'<th></th>
 </tr>
@@ -108,6 +109,7 @@ echo'<th></th>
 <th></th>
 <th></th>';
 if ($item['bay']==1){
+  echo '<th></th>';
   echo '<th></th>';
 }
 echo' </tr>
@@ -130,6 +132,7 @@ while ($item=mysql_fetch_array($res))
     if ($item['bay']==1)
       {
          echo '<td> <a href=export.php?id='.$item['id'].'><span class="glyphicon glyphicon-print"></span></a></td>';
+         echo '<td> <a href=download.php?id='.$item['id'].'><span class="glyphicon glyphicon-download"></span></a></td>';
       }
       echo '</tr>';
     }

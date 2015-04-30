@@ -7,21 +7,20 @@ $query_exp="SELECT * FROM `bay_user` where id=".$_GET['id'];
 $res_exp=mysql_query($query_exp);
 $item=mysql_fetch_array($res_exp);
 
+/*Заполнение шаблона*/
 include_once '../modules/PHPWord.php';
 $PHPWord = new PHPWord();
-
-
-
 $templateProcessor = $PHPWord->loadTemplate('../template.docx');
 $templateProcessor->setValue('Fam', ''.$item['Fam'].'');
 $templateProcessor->setValue('Name', ''.$item['Name'].'');
-$templateProcessor->setValue('FName', ''.$item['FName'].'');
+$templateProcessor->setValue('Otch', ''.$item['FName'].'');
+$templateProcessor->setValue('price', ''.$item['price'].'');
 $templateProcessor->setValue('date', ''.date("d.m.Y").'');
-//header ('Content-Type: application/vnd.ms-word; charset = utf-8\r\n"');
-//header ('Content-Disposition: attachment;filename="document.docx"');
-//header ('Cache-Control: max-age=0');
-
-
 $templateProcessor->save('../doc/'.md5(date("Ysmg").'Solarsystem').'.docx');
+$query_update="UPDATE bay_user SET doc='".('../doc/'.md5(date("Ysmg").'Solarsystem').'.docx')."' WHERE id=".$_GET['id'];
+mysql_query($query_update);
+echo 		'<script type="text/javascript">
+			window.location.href="index.php?page=1";
+			</script>';
 
 ?>
