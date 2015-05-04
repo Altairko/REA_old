@@ -31,7 +31,7 @@ $item=mysql_fetch_array($res);
 if (!isset($item['id']))
 {
 ECHO ' <div class="alert alert-danger" role="alert">
-          <center>Нет доступных объектов для продажи.</center>
+          <div style="text-align: center;">Нет доступных объектов для продажи.</div>
           </div>';
 die();
 }
@@ -41,7 +41,7 @@ $qr_result = mysql_query("select * from ".$db_table_to_show);
 if (!isset($_GET["action"])) $_GET["action"] = "showlist";
 // вывод всех записей из таблицы БД:
 
-$query='SELECT `id`, `obj_name`, `price`, `photo`, `opis`,`reserv` FROM `sale` LIMIT '.$n1.' , '.$kolv_zap.'';
+$query="SELECT `id`, `obj_name`, `price`, `photo`, `opis`,`reserv` FROM `sale` LIMIT ".$n1.' , '.$kolv_zap.'';
 $res=mysql_query($query);
 echo 
 '<table class="table table-striped">
